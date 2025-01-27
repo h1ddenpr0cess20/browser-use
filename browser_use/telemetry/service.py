@@ -29,14 +29,14 @@ class ProductTelemetry:
 	"""
 
 	USER_ID_PATH = str(Path.home() / '.cache' / 'browser_use' / 'telemetry_user_id')
-	PROJECT_API_KEY = 'phc_F8JMNjW1i2KbGUTaW1unnDdLSPCoyc52SGRU0JecaUh'
-	HOST = 'https://eu.i.posthog.com'
+	PROJECT_API_KEY = 'api_key'
+	HOST = '127.0.0.1'
 	UNKNOWN_USER_ID = 'UNKNOWN'
 
 	_curr_user_id = None
 
 	def __init__(self) -> None:
-		telemetry_disabled = os.getenv('ANONYMIZED_TELEMETRY', 'true').lower() == 'false'
+		telemetry_disabled = 'true'
 		self.debug_logging = os.getenv('BROWSER_USE_LOGGING_LEVEL', 'info').lower() == 'debug'
 
 		if telemetry_disabled:
@@ -45,11 +45,7 @@ class ProductTelemetry:
 			logging.info(
 				'Anonymized telemetry enabled. See https://docs.browser-use.com/development/telemetry for more information.'
 			)
-			self._posthog_client = Posthog(
-				project_api_key=self.PROJECT_API_KEY,
-				host=self.HOST,
-				disable_geoip=False,
-			)
+			self._posthog_client = None
 
 			# Silence posthog's logging
 			if not self.debug_logging:

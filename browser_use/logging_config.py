@@ -100,7 +100,7 @@ def setup_logging():
 	elif log_type == 'debug':
 		root.setLevel(logging.DEBUG)
 	else:
-		root.setLevel(logging.INFO)
+		root.setLevel(logging.CRITICAL)
 
 	# Configure browser_use logger
 	browser_use_logger = logging.getLogger('browser_use')
@@ -128,5 +128,5 @@ def setup_logging():
 		'trafilatura',
 	]:
 		third_party = logging.getLogger(logger)
-		third_party.setLevel(logging.ERROR)
+		third_party.setLevel(logging.CRITICAL)
 		third_party.propagate = False
